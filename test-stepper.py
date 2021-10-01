@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 from RpiMotorLib import RpiMotorLib
-    
+
 ms_pins = (-1, -1, -1)
 step_pin = 23
 direction_pin = 24

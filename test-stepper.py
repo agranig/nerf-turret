@@ -9,13 +9,14 @@ direction_pin = 24
 
 stepper1 = RpiMotorLib.A4988Nema(direction_pin, step_pin, ms_pins, "A4988")
 
-clockwise = True
+clockwise = False
 step_type = "Full"
-steps = 200
-step_delay = 0.0005
+steps = 100
+step_delay = 0.01
 verbose = True
 init_delay = 0.05
 
 stepper1.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
+#stepper1.motor_stop()
 
-GPIO.cleanup()
+#GPIO.cleanup()

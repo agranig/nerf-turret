@@ -16,6 +16,6 @@ step_delay = 0.0005
 verbose = True
 init_delay = 0.05
 
-mymotortest.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
+stepper1.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
 
 GPIO.cleanup()

@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 from RpiMotorLib import RpiMotorLib
     
 ms_pins = (-1, -1, -1)
-direction_pin = 15
-step_pin = 14
+step_pin = 23
+direction_pin = 24
 
 stepper1 = RpiMotorLib.A4988Nema(direction_pin, step_pin, ms_pins, "A4988")
 

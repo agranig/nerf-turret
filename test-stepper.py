@@ -19,12 +19,12 @@ alt_stepper = RpiMotorLib.A4988Nema(alt_direction_pin, alt_step_pin, alt_ms_pins
 
 clockwise = False
 step_type = "Full"
-steps = int(200 * az_factor)
+steps = int(50 * az_factor)
 step_delay = 0.001
 verbose = True
 init_delay = 0.01
 
-#az_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
+az_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
 
 clockwise = False
 step_type = "Full"
@@ -32,4 +32,4 @@ steps = int(200 * alt_factor)
 step_delay = 0.001
 verbose = True
 init_delay = 0.05
-alt_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
+#alt_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)

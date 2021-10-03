@@ -22,7 +22,7 @@ step_type = "Full"
 steps = int(200 * az_factor)
 step_delay = 0.001
 verbose = True
-init_delay = 0.05
+init_delay = 0.01
 
 az_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
 

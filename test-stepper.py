@@ -24,7 +24,7 @@ step_delay = 0.001
 verbose = True
 init_delay = 0.01
 
-az_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
+#az_stepper.motor_go(clockwise, step_type, steps, step_delay, verbose, init_delay)
 
 clockwise = False
 step_type = "Full"

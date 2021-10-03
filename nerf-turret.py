@@ -6,7 +6,7 @@ import time
 from Motor import Motor
 from Ps4Controller import Ps4Controller
 
-loop_int = 0.001
+loop_int = 0.01
 steps_per_loop = 1
 
 ctrl = {

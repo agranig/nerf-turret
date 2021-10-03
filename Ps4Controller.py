@@ -34,51 +34,44 @@ class Ps4Controller(Controller):
         self.ctrl["fire"] = False
         self.ctrl["lock"].release()
 
-    def on_L3_left(self, value):
-        if (value > -25000):
-            return
-        print("Left")
+
+    def on_left_arrow_press(self):
+        print("Left arrow down")
         self.ctrl["lock"].acquire()
         self.ctrl["right"] = False
         self.ctrl["left"] = True
         self.ctrl["lock"].release()
 
-    def on_L3_right(self, value):
-        if (value < 25000):
-            return
-        print("Right")
+    def on_right_arrow_press(self):
+        print("Left arrow down")
         self.ctrl["lock"].acquire()
-        self.ctrl["right"] = True
         self.ctrl["left"] = False
+        self.ctrl["right"] = True
         self.ctrl["lock"].release()
 
-    def on_L3_up(self, value):
-        if (value > -25000):
-            return
-        print("Up")
-        self.ctrl["lock"].acquire()
-        self.ctrl["up"] = True
-        self.ctrl["down"] = False
-        self.ctrl["lock"].release()
-
-    def on_L3_down(self, value):
-        if (value < 25000):
-            return
-        print("Down")
-        self.ctrl["lock"].acquire()
-        self.ctrl["up"] = False
-        self.ctrl["down"] = True
-        self.ctrl["lock"].release()
-
-    def on_L3_x_at_rest(self):
-        print("No Left/Right")
+    def on_left_right_arrow_release(self):
+        print("Left/Right arrow up")
         self.ctrl["lock"].acquire()
         self.ctrl["left"] = False
         self.ctrl["right"] = False
         self.ctrl["lock"].release()
 
-    def on_L3_y_at_rest(self):
-        print("No Up/Down")
+    def on_up_arrow_press(self):
+        print("Up arrow down")
+        self.ctrl["lock"].acquire()
+        self.ctrl["down"] = False
+        self.ctrl["up"] = True
+        self.ctrl["lock"].release()
+
+    def on_down_arrow_press(self):
+        print("Down arrow down")
+        self.ctrl["lock"].acquire()
+        self.ctrl["up"] = False
+        self.ctrl["down"] = True
+        self.ctrl["lock"].release()
+
+    def on_up_down_arrow_release(self):
+        print("Up/Down arrow up")
         self.ctrl["lock"].acquire()
         self.ctrl["up"] = False
         self.ctrl["down"] = False

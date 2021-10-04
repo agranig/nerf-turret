@@ -10,7 +10,7 @@ class Ps4Controller(Controller):
                 interface = args.get('interface'),
                 connecting_using_ds4drv = False)
 
-    def on_L2_press(self):
+    def on_L2_press(self, value):
         print("Spinning up")
         self.ctrl["lock"].acquire()
         self.ctrl["spin"] = True
@@ -22,7 +22,7 @@ class Ps4Controller(Controller):
         self.ctrl["spin"] = False
         self.ctrl["lock"].release()
 
-    def on_R2_press(self):
+    def on_R2_press(self, value):
         print("Fire up")
         self.ctrl["lock"].acquire()
         self.ctrl["fire"] = True

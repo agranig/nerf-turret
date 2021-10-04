@@ -7,10 +7,11 @@ from Motor import Motor
 from Ps4Controller import Ps4Controller
 
 loop_int = 0.01
-steps_per_loop = 1
+steps_per_loop = 800 # half turn in 1/8-mode
 
 ctrl = {
-
+    "az_stepper": None,
+    "alt_stepper": None,
     "lock": threading.Lock(),
     "left": False,
     "right": False,
@@ -22,10 +23,7 @@ ctrl = {
 }
 
 def az_handler(data):
-    stepper = Motor(
-            step_pin = 18,
-            direction_pin = 23,
-            trans_ratio = 4)
+    stepper = data["az_stepper"];
 
     while True:
         quit = False
@@ -52,10 +50,9 @@ def az_handler(data):
 
 
 def alt_handler(data):
-    stepper = Motor(
-            step_pin = 24,
-            direction_pin = 25,
-            trans_ratio = 3.2)
+    stepper = data["alt_stepper"];
+    current_up = False
+    current_down = False
 
     while True:
         quit = False
@@ -85,6 +82,18 @@ def ctrl_handler(data):
     controller.listen()
 
 if __name__ == "__main__":
+
+    ctrl["az_stepper"] = Motor(
+            step_pin = 18,
+            direction_pin = 23,
+            trans_ratio = 4,
+            step_mode = "1/8")
+
+    ctrl["alt_stepper"] = Motor(
+            step_pin = 24,
+            direction_pin = 25,
+            trans_ratio = 3.2,
+            step_mode = "1/16")
 
     az_thread = threading.Thread(
             target = az_handler,

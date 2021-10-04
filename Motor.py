@@ -9,6 +9,7 @@ class Motor:
         self.ms_pins = args.get('ms_pins', (-1, -1, -1))
         self.trans_ratio = args.get('trans_ratio', 1)
         self.type = args.get('type', "A4988")
+        self.step_mode = args.get('step_mode', "Full")
 
         self.stepper = RpiMotorLib.A4988Nema(
                 self.direction_pin,
@@ -17,14 +18,13 @@ class Motor:
                 self.type)
 
     def __turn(self, clockwise, steps):
-        step_type = "Full"
         init_delay = 0.01
         step_delay = 0.001
         verbose = False
 
         self.stepper.motor_go(
                 clockwise,
-                step_type,
+                self.step_mode,
                 int(steps * self.trans_ratio),
                 step_delay,
                 verbose,
@@ -41,3 +41,6 @@ class Motor:
 
     def down(self, steps):
         self.__turn(True, steps)
+
+    def stop(self):
+        self.stepper.motor_stop()

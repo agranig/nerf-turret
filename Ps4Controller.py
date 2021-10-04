@@ -54,6 +54,7 @@ class Ps4Controller(Controller):
         self.ctrl["lock"].acquire()
         self.ctrl["left"] = False
         self.ctrl["right"] = False
+        self.ctrl["az_stepper"].stop()
         self.ctrl["lock"].release()
 
     def on_up_arrow_press(self):
@@ -75,6 +76,7 @@ class Ps4Controller(Controller):
         self.ctrl["lock"].acquire()
         self.ctrl["up"] = False
         self.ctrl["down"] = False
+        self.ctrl["alt_stepper"].stop()
         self.ctrl["lock"].release()
 
     def on_options_press(self):

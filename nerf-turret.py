@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     ctrl["trigger"] = Trigger(
             trigger_pin = 8,
-            fire_time = 0.5,
+            fire_time = 0.1,
             rest_time = 0.5)
 
     az_thread = threading.Thread(

@@ -5,6 +5,7 @@ import time
 
 from Motor import Motor
 from Ps4Controller import Ps4Controller
+from Trigger import Trigger
 
 loop_int = 0.01
 steps_per_loop = 800 # half turn in 1/8-mode
@@ -81,6 +82,25 @@ def ctrl_handler(data):
             ctrl = data)
     controller.listen()
 
+def trigger_handler(data):
+    trigger = data["trigger"];
+
+    while True:
+        fire = False
+
+        data["lock"].acquire()
+        quit = data["quit"]
+        fire = data["fire"]
+        data["lock"].release()
+
+        if quit:
+            break
+
+        if fire:
+            trigger.trigger()
+
+        time.sleep(loop_int)
+
 if __name__ == "__main__":
 
     ctrl["az_stepper"] = Motor(
@@ -95,6 +115,11 @@ if __name__ == "__main__":
             trans_ratio = 3.2,
             step_mode = "1/16")
 
+    ctrl["trigger"] = Trigger(
+            trigger_pin = 8,
+            fire_time = 0.5,
+            rest_time = 0.5)
+
     az_thread = threading.Thread(
             target = az_handler,
             args = (ctrl,))
@@ -104,13 +129,18 @@ if __name__ == "__main__":
     ctrl_thread = threading.Thread(
             target = ctrl_handler,
             args = (ctrl,))
+    trigger_thread = threading.Thread(
+            target = trigger_handler,
+            args = (ctrl,))
 
     az_thread.start()
     alt_thread.start()
     ctrl_thread.start()
+    trigger_thread.start()
 
     az_thread.join()
     alt_thread.join()
     ctrl_thread.join()
+    trigger_thread.join()
 
     print("Shutting down")

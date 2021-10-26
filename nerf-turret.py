@@ -84,6 +84,7 @@ def ctrl_handler(data):
 
 def trigger_handler(data):
     trigger = data["trigger"];
+    last_spin = False
 
     while True:
         fire = False
@@ -91,6 +92,7 @@ def trigger_handler(data):
         data["lock"].acquire()
         quit = data["quit"]
         fire = data["fire"]
+        spin = data["spin"]
         data["lock"].release()
 
         if quit:
@@ -98,6 +100,13 @@ def trigger_handler(data):
 
         if fire:
             trigger.trigger()
+
+        if last_spin == False and spin == True:
+            last_spin = True
+            trigger.spin()
+        elif last_spin == True and spin == False:
+            last_spin = False
+            trigger.unspin()
 
         time.sleep(loop_int)
 
@@ -117,7 +126,8 @@ if __name__ == "__main__":
 
     ctrl["trigger"] = Trigger(
             trigger_pin = 8,
-            fire_time = 0.1,
+            rotor_pin = 7,
+            fire_time = 0.5,
             rest_time = 0.5)
 
     az_thread = threading.Thread(

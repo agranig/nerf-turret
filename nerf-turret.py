@@ -3,9 +3,9 @@
 import threading
 import time
 
-from Motor import Motor
-from Ps4Controller import Ps4Controller
-from Trigger import Trigger
+from lib.Motor import Motor
+from lib.Ps4Controller import Ps4Controller
+from lib.Trigger import Trigger
 
 loop_int = 0.01
 steps_per_loop = 800 # half turn in 1/8-mode

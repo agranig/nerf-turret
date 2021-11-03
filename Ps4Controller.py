@@ -10,30 +10,54 @@ class Ps4Controller(Controller):
                 interface = args.get('interface'),
                 connecting_using_ds4drv = False)
 
-    def on_L2_press(self, value):
+    def on_L1_press(self):
         print("Spinning up")
         self.ctrl["lock"].acquire()
         self.ctrl["spin"] = True
         self.ctrl["lock"].release()
 
-    def on_L2_release(self):
+    def on_L1_release(self):
         print("Spinning down")
         self.ctrl["lock"].acquire()
         self.ctrl["spin"] = False
         self.ctrl["lock"].release()
 
-    def on_R2_press(self, value):
+
+#    def on_L2_press(self, value):
+#        print("Spinning up")
+#        self.ctrl["lock"].acquire()
+#        self.ctrl["spin"] = True
+#        self.ctrl["lock"].release()
+
+#    def on_L2_release(self):
+#        print("Spinning down")
+#        self.ctrl["lock"].acquire()
+#        self.ctrl["spin"] = False
+#        self.ctrl["lock"].release()
+
+    def on_R1_press(self):
         print("Fire up")
         self.ctrl["lock"].acquire()
         self.ctrl["fire"] = True
         self.ctrl["lock"].release()
 
-    def on_R2_release(self):
+    def on_R1_release(self):
         print("Fire down")
         self.ctrl["lock"].acquire()
         self.ctrl["fire"] = False
         self.ctrl["lock"].release()
 
+#    def on_R2_press(self, value):
+#        print("Fire up")
+#        self.ctrl["lock"].acquire()
+#        self.ctrl["fire"] = True
+#        self.ctrl["lock"].release()
+
+#    def on_R2_release(self):
+#        print("Fire down")
+#        self.ctrl["lock"].acquire()
+#        self.ctrl["fire"] = False
+#        self.ctrl["lock"].release()
 
     def on_left_arrow_press(self):
         print("Left arrow down")
